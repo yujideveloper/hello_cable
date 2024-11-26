@@ -10,7 +10,7 @@ module ApplicationCable
     private
 
     def find_verified_account
-      if (current_account = Account.find_by(id: cookies.signed[:"account.id"])) && cookies.signed[:"account.expired_at"] > Time.current
+      if (current_account = Account.find_by(id: cookies.signed[:"account.id"]))
         current_account
       else
         reject_unauthorized_connection
