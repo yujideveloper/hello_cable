@@ -1,0 +1,8 @@
+<% if current_account %>
+  <p>Logged in as <%= current_account.email %></p>
+<% else %>
+  <ul>
+    <li><%= link_to "Log in", rodauth.login_path %></li>
+    <li><%= link_to "Create Account", rodauth.create_account_path %></li>
+  </ul>
+<% end %>
