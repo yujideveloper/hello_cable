@@ -41,3 +41,5 @@ group :development, :test do
 end
 
 
+
+gem "rodauth-rails", "~> 1.15"
