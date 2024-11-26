@@ -43,3 +43,5 @@ end
 
 
 gem "rodauth-rails", "~> 1.15"
+
+gem "letter_opener_web", "~> 3.0"
