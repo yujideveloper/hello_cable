@@ -100,7 +100,17 @@ class RodauthMain < Rodauth::Rails::Auth
 
     # ==> Remember Feature
     # Remember all logged in users.
-    after_login { remember_login }
+    after_login do
+      remember_login
+
+      rails_cookies.signed[:"account.id"] = account_id
+      rails_cookies.signed[:"account.expired_at"] = 30.minutes.from_now
+    end
+
+    after_logout do
+      rails_cookies.delete(:"account.id")
+      rails_cookies.delete(:"account.expired_at")
+    end
 
     # Or only remember users that have ticked a "Remember Me" checkbox on login.
     # after_login { remember_login if param_or_nil("remember") }
