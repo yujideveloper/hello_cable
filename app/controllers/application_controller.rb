@@ -8,4 +8,8 @@ class ApplicationController < ActionController::Base
     rodauth.rails_account
   end
   helper_method :current_account
+
+  def authenticate_account
+    rodauth.require_authentication
+  end
 end

@@ -3,9 +3,37 @@
   <ul>
     <li><%= link_to "Log out", rodauth.logout_path, method: :delete %></li>
   </ul>
+
+  <hr />
+
+  <div>
+    <div>Status: <span id="connection_status-text"></span></div>
+    <%= form_with model: Message.new, id: "new_message", data: { controller: "message", action: "submit->message#submit" } do |form| %>
+      <%= form.hidden_field :message_room_id, value: @message_room.id %>
+      <div>
+        <%= form.text_field :body %>
+      </div>
+      <div>
+        <%= form.button "Send", id: "send_message" %>
+      </div>
+    <% end %>
+  </div>
 <% else %>
   <ul>
     <li><%= link_to "Log in", rodauth.login_path %></li>
     <li><%= link_to "Create Account", rodauth.create_account_path %></li>
   </ul>
 <% end %>
+
+<hr />
+
+<div id="messages">
+  <!-- メッセージの一覧を表示 -->
+  <% @message_room.messages.each do |message| %>
+    <!-- メッセージの本文と投稿者を表示 -->
+    <div>
+      <p><%= message.body %></p>
+      <p><i>Posted by <%= message.account.email %> at <%= message.created_at.iso8601 %></i></p>
+    </div>
+  <% end %>
+</div>
