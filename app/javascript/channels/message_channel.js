@@ -4,13 +4,20 @@ consumer.subscriptions.create("MessageChannel", {
   connected() {
     // Called when the subscription is ready for use on the server
     console.log("Connected to the MessageChannel")
-    document.getElementById("connection_status-text").innerText = "Connected"
+    this.setConnectionStatus("Connected")
   },
 
   disconnected() {
     // Called when the subscription has been terminated by the server
     console.log("Disconnected from the MessageChannel")
-    document.getElementById("connection_status-text").innerText = "Disconnected"
+    this.setConnectionStatus("Disconnected")
+  },
+
+  setConnectionStatus(value) {
+    const tag = document.getElementById("connection_status-text");
+    if (tag !== null) {
+      tag.innerText = value;
+    }
   },
 
   received(data) {
